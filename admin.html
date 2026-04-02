@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriVoice 360 — Admin Dashboard</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>" />
+  <link rel="stylesheet" href="admin.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+
+<!-- ============ LOGIN SCREEN ============ -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <div class="login-icon">🌾</div>
+    <h1 class="login-title">Admin Access</h1>
+    <p class="login-sub">AgriVoice 360 · Research Dashboard</p>
+    <div class="login-field">
+      <label>Email Address</label>
+      <input type="email" id="loginEmail" placeholder="admin@agrivoice360.in" />
+    </div>
+    <div class="login-field">
+      <label>Password</label>
+      <input type="password" id="loginPassword" placeholder="••••••••" onkeydown="if(event.key==='Enter') doLogin()" />
+    </div>
+    <button class="btn-login" onclick="doLogin()" id="loginBtn">Sign In</button>
+    <div class="login-error" id="loginError">Invalid credentials. Please try again.</div>
+    <div style="margin-top:20px;font-size:12px;color:rgba(232,240,234,0.3)">
+      <a href="index.html" style="color:rgba(122,171,138,0.6);text-decoration:underline">← Back to Public Site</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ DASHBOARD ============ -->
+<div class="dashboard" id="dashboard">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      🌾 AgriVoice 360
+      <span>Admin Dashboard</span>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-label">Analytics</div>
+      <div class="sidebar-link active" onclick="showPage('overview',this)" id="nav-overview">
+        <span class="icon">📊</span> Overview
+      </div>
+      <div class="sidebar-link" onclick="showPage('breakdown',this)">
+        <span class="icon">📈</span> Category Breakdown
+      </div>
+      <div class="sidebar-link" onclick="showPage('map',this)">
+        <span class="icon">🗺️</span> State Map
+      </div>
+      <div class="sidebar-section-label">Data</div>
+      <div class="sidebar-link" onclick="showPage('submissions',this)">
+        <span class="icon">📋</span> All Submissions
+      </div>
+      <div class="sidebar-section-label">Settings</div>
+      <div class="sidebar-link" onclick="window.open('index.html','_blank')">
+        <span class="icon">🌐</span> View Public Site
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="sidebar-avatar" id="adminAvatar">A</div>
+        <div class="sidebar-user-info">
+          <strong id="adminEmail">admin</strong>
+          <span>Administrator</span>
+        </div>
+      </div>
+      <button class="btn-logout" onclick="doLogout()">Sign Out</button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="topbar">
+      <div>
+        <div class="topbar-title" id="pageTitle">Overview</div>
+        <div class="topbar-sub" id="pageSubtitle">Real-time research data from AgriVoice 360</div>
+      </div>
+      <div class="topbar-right">
+        <div class="realtime-badge">
+          <div class="realtime-dot"></div>
+          Live
+        </div>
+        <div style="font-size:12px;color:var(--text-muted)" id="lastRefresh"></div>
+      </div>
+    </div>
+
+    <div class="content-area">
+
+      <!-- ── PAGE: OVERVIEW ── -->
+      <div class="page active" id="page-overview">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">📝</div>
+            <div class="stat-label">Total Submissions</div>
+            <div class="stat-value" id="statTotal">—</div>
+            <div class="stat-change up" id="statTotalChange"></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🌾</div>
+            <div class="stat-label">Farmers</div>
+            <div class="stat-value" id="statFarmers">—</div>
+            <div class="stat-change up" id="statFarmersChange"></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">📍</div>
+            <div class="stat-label">States Covered</div>
+            <div class="stat-value" id="statStates">—</div>
+            <div class="stat-change up"></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🔥</div>
+            <div class="stat-label">Top Problem</div>
+            <div class="stat-value" style="font-size:1rem;padding-top:6px" id="statTopProblem">—</div>
+            <div class="stat-change" id="statTopProblemCount"></div>
+          </div>
+        </div>
+
+        <div class="charts-row">
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <div>
+                <div class="chart-card-title">Submissions Over Time</div>
+                <div class="chart-card-sub">Daily submissions in the last 30 days</div>
+              </div>
+            </div>
+            <div class="chart-container">
+              <canvas id="trendChart"></canvas>
+            </div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <div>
+                <div class="chart-card-title">By Problem Category</div>
+                <div class="chart-card-sub">Distribution of issues reported</div>
+              </div>
+            </div>
+            <div class="chart-container">
+              <canvas id="categoryChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="charts-row">
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <div>
+                <div class="chart-card-title">Respondent Roles</div>
+                <div class="chart-card-sub">Who is sharing their experience</div>
+              </div>
+            </div>
+            <div class="chart-container" style="height:220px">
+              <canvas id="roleChart"></canvas>
+            </div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <div>
+                <div class="chart-card-title">Top 5 States</div>
+                <div class="chart-card-sub">Submissions by state</div>
+              </div>
+            </div>
+            <div class="chart-container" style="height:220px">
+              <canvas id="stateChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── PAGE: BREAKDOWN ── -->
+      <div class="page" id="page-breakdown">
+        <div class="breakdown-card">
+          <div class="chart-card-header" style="padding:0 0 20px 0;border-bottom:1px solid var(--border);margin-bottom:24px">
+            <div><div class="chart-card-title">All Categories — Detailed Breakdown</div>
+            <div class="chart-card-sub">Click any bar to filter submissions</div></div>
+          </div>
+          <div class="breakdown-grid" id="breakdownGrid">
+            <div class="breakdown-item"><div class="breakdown-icon">📉</div><div style="flex:1"><div class="breakdown-label">Crop Price & Market</div><div class="breakdown-bar-wrap"><div class="breakdown-bar" id="bar_crop_price" style="width:0%"></div></div></div><div class="breakdown-count" id="cnt_crop_price">0</div></div>
+            <div class="breakdown-item"><div class="breakdown-icon">🌧️</div><div style="flex:1"><div class="breakdown-label">Weather & Climate</div><div class="breakdown-bar-wrap"><div class="breakdown-bar" id="bar_weather_climate" style="width:0%"></div></div></div><div class="breakdown-count" id="cnt_weather_climate">0</div></div>
+            <div class="breakdown-item"><div class="breakdown-icon">🐛</div><div style="flex:1"><div class="breakdown-label">Pest & Disease</div><div class="breakdown-bar-wrap"><div class="breakdown-bar" id="bar_pest_disease" style="width:0%"></div></div></div><div class="breakdown-count" id="cnt_pest_disease">0</div></div>
+            <div class="breakdown-item"><div class="breakdown-icon">💧</div><div style="flex:1"><div class="breakdown-label">Water & Irrigation</div><div class="breakdown-bar-wrap"><div class="breakdown-bar" id="bar_water_irrigation" style="width:0%"></div></div></div><div class="breakdown-count" id="cnt_water_irrigation">0</div></div>
+            <div class="breakdown-item"><div class="breakdown-icon">🏦</div><div style="flex:1"><div class="breakdown-label">Loans & Credit</div><div class="breakdown-bar-wrap"><div class="breakdown-bar" id="bar_loans_credit" style="width:0%"></div></div></div><div class="breakdown-count" id="cnt_loans_credit">0</div></div>
+            <div class="breakdown-item"><div class="breakdown-icon">🚛</div><div style="flex:1"><div class="breakdown-label">Transport & Storage</div><div class="breakdown-bar-wrap"><div class="breakdown-bar" id="bar_transport_storage" style="width:0%"></div></div></div><div class="breakdown-count" id="cnt_transport_storage">0</div></div>
+            <div class="breakdown-item"><div class="breakdown-icon">📋</div><div style="flex:1"><div class="breakdown-label">Govt Schemes</div><div class="breakdown-bar-wrap"><div class="breakdown-bar" id="bar_govt_schemes" style="width:0%"></div></div></div><div class="breakdown-count" id="cnt_govt_schemes">0</div></div>
+            <div class="breakdown-item"><div class="breakdown-icon">🌱</div><div style="flex:1"><div class="breakdown-label">Seed & Input</div><div class="breakdown-bar-wrap"><div class="breakdown-bar" id="bar_seed_input" style="width:0%"></div></div></div><div class="breakdown-count" id="cnt_seed_input">0</div></div>
+            <div class="breakdown-item"><div class="breakdown-icon">📱</div><div style="flex:1"><div class="breakdown-label">Information Gap</div><div class="breakdown-bar-wrap"><div class="breakdown-bar" id="bar_information_gap" style="width:0%"></div></div></div><div class="breakdown-count" id="cnt_information_gap">0</div></div>
+            <div class="breakdown-item"><div class="breakdown-icon">🏥</div><div style="flex:1"><div class="breakdown-label">Health & Safety</div><div class="breakdown-bar-wrap"><div class="breakdown-bar" id="bar_health_safety" style="width:0%"></div></div></div><div class="breakdown-count" id="cnt_health_safety">0</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── PAGE: MAP ── -->
+      <div class="page" id="page-map">
+        <div class="map-card">
+          <div class="map-card-header">
+            <div>
+              <div class="chart-card-title">State-wise Submission Heatmap</div>
+              <div class="chart-card-sub">Darker = more submissions from that state</div>
+            </div>
+            <div class="map-legend">
+              <div class="legend-item"><div class="legend-dot" style="background:rgba(122,171,138,0.2)"></div> 1–5</div>
+              <div class="legend-item"><div class="legend-dot" style="background:rgba(122,171,138,0.5)"></div> 6–20</div>
+              <div class="legend-item"><div class="legend-dot" style="background:rgba(122,171,138,0.8)"></div> 21–50</div>
+              <div class="legend-item"><div class="legend-dot" style="background:#7aab8a"></div> 50+</div>
+            </div>
+          </div>
+          <div id="stateMap"></div>
+        </div>
+      </div>
+
+      <!-- ── PAGE: SUBMISSIONS ── -->
+      <div class="page" id="page-submissions">
+        <div class="table-card">
+          <div class="table-toolbar">
+            <div class="search-wrap">
+              <input type="text" id="tableSearch" placeholder="Search by name, location or problem..." oninput="filterTable()" />
+            </div>
+            <select class="filter-select" id="filterCategory" onchange="filterTable()">
+              <option value="">All Categories</option>
+              <option value="crop_price">Crop Price</option>
+              <option value="weather_climate">Weather</option>
+              <option value="pest_disease">Pest & Disease</option>
+              <option value="water_irrigation">Water</option>
+              <option value="loans_credit">Loans</option>
+              <option value="transport_storage">Transport</option>
+              <option value="govt_schemes">Govt Schemes</option>
+              <option value="seed_input">Seeds</option>
+              <option value="information_gap">Info Gap</option>
+              <option value="health_safety">Health</option>
+            </select>
+            <select class="filter-select" id="filterRole" onchange="filterTable()">
+              <option value="">All Roles</option>
+              <option value="farmer">Farmer</option>
+              <option value="family">Family</option>
+              <option value="student">Student</option>
+              <option value="expert">Expert</option>
+              <option value="trader">Trader</option>
+              <option value="ngo">NGO</option>
+            </select>
+            <button class="btn-export" onclick="exportCSV()">⬇️ Export CSV</button>
+          </div>
+          <div style="overflow-x:auto">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Location</th>
+                  <th>Role</th>
+                  <th>Category</th>
+                  <th>Problem (Preview)</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody id="subTableBody">
+                <tr><td colspan="7" class="table-empty">Loading submissions...</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-pagination">
+            <span id="tableCount">Showing 0 results</span>
+            <div class="pagination-btns" id="paginationBtns"></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content-area -->
+  </div><!-- /main-content -->
+</div><!-- /dashboard -->
+
+<!-- ============ SUBMISSION DETAIL MODAL ============ -->
+<div class="modal-overlay" id="detailModal" onclick="if(event.target===this) closeModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title" id="modalName">—</div>
+        <div class="modal-sub" id="modalSub">—</div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-field-row">
+        <div class="modal-field">
+          <label>State</label>
+          <p id="mState">—</p>
+        </div>
+        <div class="modal-field">
+          <label>District</label>
+          <p id="mDistrict">—</p>
+        </div>
+      </div>
+      <div class="modal-field-row">
+        <div class="modal-field">
+          <label>Role</label>
+          <p id="mRole">—</p>
+        </div>
+        <div class="modal-field">
+          <label>Farming</label>
+          <p id="mFarming">—</p>
+        </div>
+      </div>
+      <div class="modal-field">
+        <label>Primary Crop / Farm Type</label>
+        <p id="mCrop">—</p>
+      </div>
+      <div class="modal-field">
+        <label>Problem Category</label>
+        <div style="margin-top:6px"><span class="cat-pill" id="mCategory">—</span></div>
+      </div>
+      <div class="modal-field">
+        <label>Problem Description</label>
+        <p id="mProblem" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:14px">—</p>
+      </div>
+      <div class="modal-field">
+        <label>Suggested Solution</label>
+        <p id="mSolution" style="background:rgba(122,171,138,0.06);border:1px solid rgba(122,171,138,0.15);border-radius:8px;padding:14px">—</p>
+      </div>
+      <div class="modal-field" id="mExtraWrap">
+        <label>Extra Comments</label>
+        <p id="mExtra">—</p>
+      </div>
+      <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:20px">
+        <button style="padding:10px 20px;background:rgba(224,82,82,0.1);border:1px solid rgba(224,82,82,0.2);border-radius:8px;color:#e05252;cursor:pointer;font-size:13px" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="supabase-config.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

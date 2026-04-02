@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriVoice 360 | Real Farmer Stories, Real Solutions</title>
+  <meta name="description" content="Share your farming challenges and help build better agricultural solutions. A research initiative to understand the real problems farmers face across India." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌾</text></svg>" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body id="top">
+
+<!-- ======= NAVIGATION ======= -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </div>
+      <div class="nav-logo-text">
+        AgriVoice 360
+        <span>Farmer Research Initiative</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#why">Why It Matters</a>
+      <a href="#who">Who Can Respond</a>
+      <a href="#problems">Problems</a>
+      <a href="#voices">Voices</a>
+      <a href="#rewards">Rewards</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-toggle">
+        <button id="btnEn" class="active" onclick="setLang('en')">EN</button>
+        <button id="btnHi" onclick="setLang('hi')">HI</button>
+      </div>
+      <button class="btn-nav" onclick="scrollToForm()">Share Experience →</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ======= HERO ======= -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-watermark show-en">FARMERS</div>
+  <div class="hero-watermark show-hi" style="display:none">किसान</div>
+  <div class="hero-content container">
+    <div class="hero-left">
+      <div class="hero-label show-en">Research Initiative · 2025</div>
+      <div class="hero-label show-hi" style="display:none">अनुसंधान पहल · 2025</div>
+      <h1 class="hero-title">
+        <span class="show-en">Help us understand<br>the <span class="accent">real problems</span><br>farmers face.</span>
+        <span class="show-hi" style="display:none">किसानों की <span class="accent">असली समस्याएं</span><br>समझने में मदद करें।</span>
+      </h1>
+      <p class="hero-description show-en">
+        Before we build solutions, we want to listen. Your experience from the field — the struggles, the gaps, the things that never work — is the most valuable data we can collect.
+      </p>
+      <p class="hero-description show-hi" style="display:none">
+        समाधान बनाने से पहले, हम सुनना चाहते हैं। आपका अनुभव — संघर्ष, कमियां, जो कभी काम नहीं करता — सबसे मूल्यवान डेटा है।
+      </p>
+      <div class="hero-cta-group">
+        <button class="btn-primary" onclick="scrollToForm()">
+          <span class="show-en">Share Your Experience →</span>
+          <span class="show-hi" style="display:none">अपना अनुभव साझा करें →</span>
+        </button>
+        <button class="btn-secondary" onclick="document.getElementById('why').scrollIntoView({behavior:'smooth'})">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          <span class="show-en">Read why this matters</span>
+          <span class="show-hi" style="display:none">यह क्यों मायने रखता है</span>
+        </button>
+      </div>
+      <div class="hero-trustbadge">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        Anonymous &amp; confidential · No sales calls · Research only
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat-card reveal">
+        <div class="hero-stat-number"><span class="counter" data-target="2847">0</span></div>
+        <div class="hero-stat-label">Voices collected across India</div>
+        <div class="hero-stat-bar"><div class="hero-stat-fill" style="width:72%"></div></div>
+      </div>
+      <div class="hero-stat-card reveal" style="transition-delay:0.1s">
+        <div class="hero-stat-number"><span class="counter" data-target="28">0</span><span style="font-size:1.5rem;color:rgba(245,240,232,0.5)"> states</span></div>
+        <div class="hero-stat-label">Regions represented</div>
+        <div class="hero-stat-bar"><div class="hero-stat-fill" style="width:90%"></div></div>
+      </div>
+      <div class="hero-stat-card reveal" style="transition-delay:0.2s">
+        <div class="hero-stat-number"><span class="counter" data-target="10">0</span><span style="font-size:1.5rem;color:var(--gold-light)">+</span></div>
+        <div class="hero-stat-label">Problem categories identified</div>
+        <div class="hero-stat-bar"><div class="hero-stat-fill" style="width:100%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= WHY IT MATTERS ======= -->
+<section class="why-section" id="why">
+  <div class="why-inner">
+    <div class="why-header reveal">
+      <div class="section-label show-en">Why Your Input Matters</div>
+      <div class="section-label show-hi" style="display:none">आपका इनपुट क्यों मायने रखता है</div>
+      <h2 class="section-title show-en">Farming problems in <span class="accent">Andhra Pradesh</span><br>are not the same as problems in Punjab.</h2>
+      <h2 class="section-title show-hi" style="display:none">आंध्र प्रदेश की खेती की समस्याएं<br>पंजाब जैसी <span class="accent">नहीं हैं।</span></h2>
+      <p class="section-subtitle show-en">Regional diversity means generic solutions fail. Your honest story helps us build what actually works.</p>
+      <p class="section-subtitle show-hi" style="display:none">क्षेत्रीय विविधता का मतलब है कि सामान्य समाधान विफल होते हैं।</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-number">01</div>
+        <h3 class="show-en">Every region has different problems</h3>
+        <h3 class="show-hi" style="display:none">हर क्षेत्र की अलग समस्याएं हैं</h3>
+        <p class="show-en">Rainfall, soil type, crop variety, local mandi rates — farming challenges are deeply local. Generic solutions built without local input fail farmers at the last mile.</p>
+        <p class="show-hi" style="display:none">वर्षा, मिट्टी का प्रकार, फसल किस्म — खेती की चुनौतियाँ गहराई से स्थानीय हैं।</p>
+      </div>
+      <div class="why-card reveal" style="transition-delay:0.1s">
+        <div class="why-number">02</div>
+        <h3 class="show-en">Real experiences reveal what data hides</h3>
+        <h3 class="show-hi" style="display:none">वास्तविक अनुभव वो दिखाते हैं जो डेटा छुपाता है</h3>
+        <p class="show-en">Official reports show averages. Your firsthand experience shows what really happens — the broker who shows up late, the loan process that takes four months, the crop that failed because of one unusual frost.</p>
+        <p class="show-hi" style="display:none">आधिकारिक रिपोर्ट औसत दिखाती हैं। आपका अनुभव वास्तविकता दिखाता है।</p>
+      </div>
+      <div class="why-card reveal" style="transition-delay:0.2s">
+        <div class="why-number">03</div>
+        <h3 class="show-en">Honest answers lead to useful tools</h3>
+        <h3 class="show-hi" style="display:none">ईमानदार उत्तर उपयोगी समाधान बनाते हैं</h3>
+        <p class="show-en">We are at the research stage. No product exists yet. Your input directly shapes what gets built — what problems to solve first, and what solutions are actually practical.</p>
+        <p class="show-hi" style="display:none">हम अनुसंधान चरण में हैं। आपका इनपुट सीधे निर्माण को आकार देता है।</p>
+      </div>
+      <div class="why-card reveal" style="transition-delay:0.3s">
+        <div class="why-number">04</div>
+        <h3 class="show-en">Your voice represents thousands</h3>
+        <h3 class="show-hi" style="display:none">आपकी आवाज़ हजारों का प्रतिनिधित्व करती है</h3>
+        <p class="show-en">Many farmers face the same problems but never get the chance to say so. By sharing your experience here, you give voice to problems that are bigger than one farm.</p>
+        <p class="show-hi" style="display:none">कई किसान एक ही समस्या का सामना करते हैं लेकिन बोलने का मौका नहीं मिलता।</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= WHO CAN RESPOND ======= -->
+<section class="who-section" id="who">
+  <div class="who-inner">
+    <div class="who-layout">
+      <div class="who-text reveal">
+        <div class="section-label show-en">Who Can Respond</div>
+        <div class="section-label show-hi" style="display:none">कौन जवाब दे सकता है</div>
+        <h2 class="who-tagline show-en">You don't have<br>to be a farmer<br>to respond.</h2>
+        <h2 class="who-tagline show-hi" style="display:none">जवाब देने के लिए<br>किसान होना<br>ज़रूरी नहीं।</h2>
+        <p class="who-desc show-en">If you know, live, or work near farming — your perspective matters. We are listening to everyone who understands what farmers actually go through.</p>
+        <p class="who-desc show-hi" style="display:none">अगर आप खेती के पास रहते, जानते या काम करते हैं — आपका दृष्टिकोण मायने रखता है।</p>
+      </div>
+      <div class="who-roles reveal" style="transition-delay:0.1s">
+        <div class="role-card"><div class="role-icon" style="background:#f0faf4">👨‍🌾</div><div class="role-info"><h4>Farmers (Active or Retired)</h4><p>Any crop, any scale — small holdings to large farms</p></div></div>
+        <div class="role-card"><div class="role-icon" style="background:#faf0f0">👨‍👩‍👧</div><div class="role-info"><h4>Farming Family Members</h4><p>You have seen the struggles up close, often more than anyone</p></div></div>
+        <div class="role-card"><div class="role-icon" style="background:#f0f4fa">🎓</div><div class="role-info"><h4>Agriculture Students &amp; Researchers</h4><p>BSc Agri, MSc, or anyone studying related fields</p></div></div>
+        <div class="role-card"><div class="role-icon" style="background:#faf8f0">🏪</div><div class="role-info"><h4>Agri Input Dealers &amp; Traders</h4><p>Seed sellers, fertilizer shops, mandi traders, equipment dealers</p></div></div>
+        <div class="role-card"><div class="role-icon" style="background:#f4f0fa">🏦</div><div class="role-info"><h4>Rural Banking / Credit Workers</h4><p>Those who work directly with farmer loans and Kisan Credit Cards</p></div></div>
+        <div class="role-card"><div class="role-icon" style="background:#f0fafa">🤝</div><div class="role-info"><h4>Anyone closely aware of farmer problems</h4><p>Field agents, NGO workers, village volunteers, local leaders</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= PROBLEM CATEGORIES ======= -->
+<section class="problems-section" id="problems">
+  <div class="problems-inner">
+    <div class="problems-header">
+      <div class="section-label show-en">What Kind of Problems</div>
+      <div class="section-label show-hi" style="display:none">किस तरह की समस्याएं</div>
+      <h2 class="section-title show-en">Tell us what you or farmers<br>around you <span class="italic-accent">actually struggle with.</span></h2>
+      <h2 class="section-title show-hi" style="display:none">बताएं आप या आपके आस-पास के किसान<br><span class="italic-accent">किससे जूझते हैं।</span></h2>
+      <p class="section-subtitle" style="margin:16px auto 0;text-align:center">These are examples — but don't limit yourself. Click a card to pre-fill the form.</p>
+    </div>
+    <div class="problems-grid" id="problemGrid">
+      <div class="problem-card" onclick="selectProblem(this,'crop_price')" data-value="crop_price">
+        <span class="problem-icon">📉</span>
+        <div class="problem-label show-en">Crop Price &amp; Market Problems</div>
+        <div class="problem-label show-hi" style="display:none">फसल मूल्य और बाज़ार की समस्याएं</div>
+        <div class="problem-desc show-en">Low MSP, broker unfairness, sudden price drops, no access to direct buyers</div>
+        <div class="problem-desc show-hi" style="display:none">कम MSP, बिचौलियों की मनमानी, अचानक कीमत गिरना</div>
+      </div>
+      <div class="problem-card" onclick="selectProblem(this,'weather_climate')" data-value="weather_climate">
+        <span class="problem-icon">🌧️</span>
+        <div class="problem-label show-en">Weather &amp; Climate Issues</div>
+        <div class="problem-label show-hi" style="display:none">मौसम और जलवायु समस्याएं</div>
+        <div class="problem-desc show-en">Unseasonal rains, droughts, hailstorm losses, no early warning systems</div>
+        <div class="problem-desc show-hi" style="display:none">बेमौसम बारिश, सूखा, ओलावृष्टि, कोई पूर्व चेतावनी नहीं</div>
+      </div>
+      <div class="problem-card" onclick="selectProblem(this,'pest_disease')" data-value="pest_disease">
+        <span class="problem-icon">🐛</span>
+        <div class="problem-label show-en">Pest, Disease &amp; Crop Loss</div>
+        <div class="problem-label show-hi" style="display:none">कीट, रोग और फसल नुकसान</div>
+        <div class="problem-desc show-en">Pest attacks with no nearby guidance, counterfeit pesticides, late diagnosis</div>
+        <div class="problem-desc show-hi" style="display:none">कीट हमले, नकली कीटनाशक, देर से इलाज</div>
+      </div>
+      <div class="problem-card" onclick="selectProblem(this,'water_irrigation')" data-value="water_irrigation">
+        <span class="problem-icon">💧</span>
+        <div class="problem-label show-en">Water &amp; Irrigation</div>
+        <div class="problem-label show-hi" style="display:none">पानी और सिंचाई</div>
+        <div class="problem-desc show-en">Water shortage, broken borewell infrastructure, uneven canal distribution</div>
+        <div class="problem-desc show-hi" style="display:none">पानी की कमी, टूटे बोरवेल, असमान नहर वितरण</div>
+      </div>
+      <div class="problem-card" onclick="selectProblem(this,'loans_credit')" data-value="loans_credit">
+        <span class="problem-icon">🏦</span>
+        <div class="problem-label show-en">Loans, Credit &amp; Money Issues</div>
+        <div class="problem-label show-hi" style="display:none">ऋण, क्रेडिट और पैसे की समस्याएं</div>
+        <div class="problem-desc show-en">Difficult loan processes, high interest from moneylenders, insurance rejection</div>
+        <div class="problem-desc show-hi" style="display:none">कठिन ऋण प्रक्रिया, साहूकारों का ऊंचा ब्याज, बीमा अस्वीकृति</div>
+      </div>
+      <div class="problem-card" onclick="selectProblem(this,'transport_storage')" data-value="transport_storage">
+        <span class="problem-icon">🚛</span>
+        <div class="problem-label show-en">Transport &amp; Storage</div>
+        <div class="problem-label show-hi" style="display:none">परिवहन और भंडारण</div>
+        <div class="problem-desc show-en">No cold storage nearby, high transport cost, post-harvest losses during transit</div>
+        <div class="problem-desc show-hi" style="display:none">पास में कोल्ड स्टोरेज नहीं, ऊंची परिवहन लागत</div>
+      </div>
+      <div class="problem-card" onclick="selectProblem(this,'govt_schemes')" data-value="govt_schemes">
+        <span class="problem-icon">📋</span>
+        <div class="problem-label show-en">Government Scheme Access</div>
+        <div class="problem-label show-hi" style="display:none">सरकारी योजना तक पहुंच</div>
+        <div class="problem-desc show-en">Paperwork complexity, PM-Kisan delays, fertilizer subsidy gaps, unaware of benefits</div>
+        <div class="problem-desc show-hi" style="display:none">जटिल कागजी कार्रवाई, PM-किसान में देरी</div>
+      </div>
+      <div class="problem-card" onclick="selectProblem(this,'seed_input')" data-value="seed_input">
+        <span class="problem-icon">🌱</span>
+        <div class="problem-label show-en">Seed &amp; Input Quality</div>
+        <div class="problem-label show-hi" style="display:none">बीज और इनपुट गुणवत्ता</div>
+        <div class="problem-desc show-en">Adulterated seeds, wrong fertilizer advice, lack of certified suppliers locally</div>
+        <div class="problem-desc show-hi" style="display:none">मिलावटी बीज, गलत उर्वरक सलाह</div>
+      </div>
+      <div class="problem-card" onclick="selectProblem(this,'information_gap')" data-value="information_gap">
+        <span class="problem-icon">📱</span>
+        <div class="problem-label show-en">Information &amp; Advisory Gap</div>
+        <div class="problem-label show-hi" style="display:none">सूचना और सलाह की कमी</div>
+        <div class="problem-desc show-en">No agronomist access, language barriers, no timely crop advisory in local language</div>
+        <div class="problem-desc show-hi" style="display:none">कृषि विशेषज्ञ नहीं, भाषा अवरोध</div>
+      </div>
+      <div class="problem-card" onclick="selectProblem(this,'health_safety')" data-value="health_safety">
+        <span class="problem-icon">🏥</span>
+        <div class="problem-label show-en">Health &amp; Safety of Farmers</div>
+        <div class="problem-label show-hi" style="display:none">किसानों का स्वास्थ्य और सुरक्षा</div>
+        <div class="problem-desc show-en">Pesticide exposure without protection, no health insurance, mental stress of debt</div>
+        <div class="problem-desc show-hi" style="display:none">कीटनाशक संपर्क, स्वास्थ्य बीमा नहीं, कर्ज का मानसिक तनाव</div>
+      </div>
+    </div>
+    <p class="problems-note show-en">Don't see your problem? You can describe it in the form below.</p>
+    <p class="problems-note show-hi" style="display:none">आपकी समस्या नहीं दिख रही? नीचे फॉर्म में बताएं।</p>
+  </div>
+</section>
+
+<!-- ======= COMMUNITY VOICES ======= -->
+<section class="voices-section" id="voices">
+  <div class="voices-inner">
+    <div class="voices-header reveal">
+      <div class="section-label show-en">Community Stories</div>
+      <div class="section-label show-hi" style="display:none">समुदाय की कहानियां</div>
+      <h2 class="section-title show-en">Voices from the Field</h2>
+      <h2 class="section-title show-hi" style="display:none">खेत से आवाज़ें</h2>
+      <p class="section-subtitle show-en">Real stories shared by farmers like you — unfiltered, unedited.</p>
+      <p class="section-subtitle show-hi" style="display:none">आप जैसे किसानों द्वारा साझा की गई वास्तविक कहानियां।</p>
+    </div>
+    <div class="voices-grid" id="voicesGrid">
+      <!-- Loaded dynamically from Supabase -->
+      <div class="voice-card skeleton" style="height:180px"></div>
+      <div class="voice-card skeleton" style="height:180px"></div>
+      <div class="voice-card skeleton" style="height:180px"></div>
+    </div>
+    <div class="voices-cta">
+      <button class="btn-outline" id="loadMoreVoices" onclick="loadMoreVoices()">Load More Stories</button>
+    </div>
+  </div>
+</section>
+
+<!-- ======= MULTI-STEP FORM ======= -->
+<section class="form-section" id="experience">
+  <div class="form-inner">
+    <div class="form-layout">
+      <!-- Left Column -->
+      <div class="form-left">
+        <div class="section-label">Share Your Experience</div>
+        <h2 class="section-title" style="color:var(--cream);font-size:2.5rem">
+          We want to<br><em>listen first,</em><br>then build.
+        </h2>
+        <p class="section-subtitle" style="color:rgba(245,240,232,0.6);margin-top:16px">
+          This form is not a customer survey. There is no product to rate. We are at the earliest stage — trying to understand what problems matter most, and what solutions make real sense on the ground.
+        </p>
+        <div class="form-tip">
+          <div class="form-tip-title">📌 Please be honest and specific.</div>
+          <p>Vague answers like "everything is difficult" don't help us improve anything. Specific answers like "I waited 6 months for my PM-Kisan amount and had to take a loan at 24% interest" — that helps us build something real.</p>
+        </div>
+        <div class="form-privacy">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          Your data is private. No spam. No sales calls. Research only.
+        </div>
+      </div>
+
+      <!-- Right Column: Form -->
+      <div class="form-right">
+        <div class="form-progress">
+          <div class="progress-steps">
+            <div class="progress-step active" id="pstep1"></div>
+            <div class="progress-step" id="pstep2"></div>
+            <div class="progress-step" id="pstep3"></div>
+            <div class="progress-step" id="pstep4"></div>
+          </div>
+          <div class="progress-label">Step <span id="stepNum">1</span> of 4</div>
+        </div>
+
+        <div class="form-panel">
+          <!-- STEP 1: Personal Info -->
+          <div class="step active" id="step1">
+            <h3 class="step-title show-en">About You</h3>
+            <h3 class="step-title show-hi" style="display:none">आपके बारे में</h3>
+            <p class="step-subtitle show-en">Basic information to understand who is sharing this experience.</p>
+            <p class="step-subtitle show-hi" style="display:none">यह समझने के लिए कि अनुभव कौन साझा कर रहा है।</p>
+            <div class="form-row">
+              <div class="form-field" id="ff_name">
+                <label>Your Name *</label>
+                <input type="text" id="inp_name" placeholder="e.g. Ramaiah Re" />
+                <div class="field-error">Please enter your name.</div>
+              </div>
+              <div class="form-field" id="ff_email">
+                <label>Email Address *</label>
+                <input type="email" id="inp_email" placeholder="your@email.com" />
+                <div class="field-error">Please enter a valid email.</div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label>State *</label>
+                <select id="inp_state">
+                  <option value="">Select your state</option>
+                  <option>Andhra Pradesh</option><option>Arunachal Pradesh</option>
+                  <option>Assam</option><option>Bihar</option>
+                  <option>Chhattisgarh</option><option>Goa</option>
+                  <option>Gujarat</option><option>Haryana</option>
+                  <option>Himachal Pradesh</option><option>Jharkhand</option>
+                  <option>Karnataka</option><option>Kerala</option>
+                  <option>Madhya Pradesh</option><option>Maharashtra</option>
+                  <option>Manipur</option><option>Meghalaya</option>
+                  <option>Mizoram</option><option>Nagaland</option>
+                  <option>Odisha</option><option>Punjab</option>
+                  <option>Rajasthan</option><option>Sikkim</option>
+                  <option>Tamil Nadu</option><option>Telangana</option>
+                  <option>Tripura</option><option>Uttar Pradesh</option>
+                  <option>Uttarakhand</option><option>West Bengal</option>
+                  <option>Delhi</option><option>Jammu & Kashmir</option>
+                </select>
+              </div>
+              <div class="form-field" id="ff_district">
+                <label>District / Village</label>
+                <input type="text" id="inp_district" placeholder="e.g. Vizianagaram" />
+              </div>
+            </div>
+            <div class="form-field">
+              <label>Your Role *</label>
+              <div class="role-selector">
+                <label class="role-option selected" onclick="selectRole(this,'farmer')">
+                  <input type="radio" name="role" value="farmer" checked />
+                  <span class="role-emoji">👨‍🌾</span> Farmer
+                </label>
+                <label class="role-option" onclick="selectRole(this,'family')">
+                  <input type="radio" name="role" value="family" />
+                  <span class="role-emoji">👨‍👩‍👧</span> Family Member
+                </label>
+                <label class="role-option" onclick="selectRole(this,'student')">
+                  <input type="radio" name="role" value="student" />
+                  <span class="role-emoji">🎓</span> Agri Student
+                </label>
+                <label class="role-option" onclick="selectRole(this,'expert')">
+                  <input type="radio" name="role" value="expert" />
+                  <span class="role-emoji">👔</span> Expert / Advisor
+                </label>
+                <label class="role-option" onclick="selectRole(this,'trader')">
+                  <input type="radio" name="role" value="trader" />
+                  <span class="role-emoji">🏪</span> Trader / Dealer
+                </label>
+                <label class="role-option" onclick="selectRole(this,'ngo')">
+                  <input type="radio" name="role" value="ngo" />
+                  <span class="role-emoji">🤝</span> NGO / Volunteer
+                </label>
+              </div>
+            </div>
+            <div class="form-nav">
+              <div></div>
+              <button class="btn-next" onclick="nextStep(1)">Continue <span>→</span></button>
+            </div>
+          </div>
+
+          <!-- STEP 2: Farming Involvement -->
+          <div class="step" id="step2">
+            <h3 class="step-title show-en">Your Farming Connection</h3>
+            <h3 class="step-title show-hi" style="display:none">खेती से आपका संबंध</h3>
+            <p class="step-subtitle show-en">Tell us about your direct involvement with farming.</p>
+            <p class="step-subtitle show-hi" style="display:none">खेती में अपनी प्रत्यक्ष भागीदारी के बारे में बताएं।</p>
+            <div class="form-field">
+              <label>Are you currently involved in farming?</label>
+              <div class="farming-toggle">
+                <div class="farming-option selected" onclick="selectFarming(this,'yes')" id="farm_yes">
+                  <input type="radio" name="farming" value="yes" checked style="display:none"/>
+                  <div class="farming-icon">🌾</div>
+                  <div class="farming-label">Yes, Actively Farming</div>
+                  <div class="farming-sub">Currently cultivating crops or livestock</div>
+                </div>
+                <div class="farming-option" onclick="selectFarming(this,'no')" id="farm_no">
+                  <input type="radio" name="farming" value="no" style="display:none"/>
+                  <div class="farming-icon">🔗</div>
+                  <div class="farming-label">Not Directly, But Closely Connected</div>
+                  <div class="farming-sub">Family, advisor, student or nearby worker</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-field">
+              <label>Primary Crop / Farming Type</label>
+              <input type="text" id="inp_crop" placeholder="e.g. Rice, Wheat, Vegetables, Dairy, Cotton..." />
+              <div class="field-hint">Leave blank if not applicable</div>
+            </div>
+            <div class="form-field">
+              <label>Approximate Farm Size</label>
+              <select id="inp_farmsize">
+                <option value="">Select (optional)</option>
+                <option>Less than 1 acre</option>
+                <option>1–5 acres</option>
+                <option>5–10 acres</option>
+                <option>10–25 acres</option>
+                <option>More than 25 acres</option>
+              </select>
+            </div>
+            <div class="form-nav">
+              <button class="btn-back" onclick="prevStep(2)">← Back</button>
+              <button class="btn-next" onclick="nextStep(2)">Continue →</button>
+            </div>
+          </div>
+
+          <!-- STEP 3: The Problem -->
+          <div class="step" id="step3">
+            <h3 class="step-title show-en">The Real Problem</h3>
+            <h3 class="step-title show-hi" style="display:none">असली समस्या</h3>
+            <p class="step-subtitle show-en">Be as specific and honest as possible — which crop, which season, what happened, how much was the loss.</p>
+            <p class="step-subtitle show-hi" style="display:none">जितना हो सके उतना विशिष्ट और ईमानदार रहें।</p>
+            <div class="form-field">
+              <label>Problem Category *</label>
+              <div class="problem-mini-grid" id="miniCategoryGrid">
+                <div class="problem-mini-card" onclick="selectMiniCategory(this,'crop_price')" data-val="crop_price"><span class="emoji">📉</span> Crop Price & Market</div>
+                <div class="problem-mini-card" onclick="selectMiniCategory(this,'weather_climate')" data-val="weather_climate"><span class="emoji">🌧️</span> Weather & Climate</div>
+                <div class="problem-mini-card" onclick="selectMiniCategory(this,'pest_disease')" data-val="pest_disease"><span class="emoji">🐛</span> Pest & Disease</div>
+                <div class="problem-mini-card" onclick="selectMiniCategory(this,'water_irrigation')" data-val="water_irrigation"><span class="emoji">💧</span> Water & Irrigation</div>
+                <div class="problem-mini-card" onclick="selectMiniCategory(this,'loans_credit')" data-val="loans_credit"><span class="emoji">🏦</span> Loans & Credit</div>
+                <div class="problem-mini-card" onclick="selectMiniCategory(this,'transport_storage')" data-val="transport_storage"><span class="emoji">🚛</span> Transport & Storage</div>
+                <div class="problem-mini-card" onclick="selectMiniCategory(this,'govt_schemes')" data-val="govt_schemes"><span class="emoji">📋</span> Govt Schemes</div>
+                <div class="problem-mini-card" onclick="selectMiniCategory(this,'seed_input')" data-val="seed_input"><span class="emoji">🌱</span> Seed & Input</div>
+                <div class="problem-mini-card" onclick="selectMiniCategory(this,'information_gap')" data-val="information_gap"><span class="emoji">📱</span> Information Gap</div>
+                <div class="problem-mini-card" onclick="selectMiniCategory(this,'health_safety')" data-val="health_safety"><span class="emoji">🏥</span> Health & Safety</div>
+              </div>
+              <div class="field-error" id="catError" style="margin-top:8px">Please select a problem category.</div>
+            </div>
+            <div class="form-field" id="ff_problem">
+              <label>What is the Biggest Problem You or Farmers Around You Face? *</label>
+              <textarea id="inp_problem" rows="5" placeholder="Describe in your own words. Be as specific and honest as possible — which crop, which season, what happened, how much was the loss..."></textarea>
+              <div class="field-error">Please describe the problem (at least 30 characters).</div>
+            </div>
+            <div class="form-nav">
+              <button class="btn-back" onclick="prevStep(3)">← Back</button>
+              <button class="btn-next" onclick="nextStep(3)">Continue →</button>
+            </div>
+          </div>
+
+          <!-- STEP 4: Solutions & Extras -->
+          <div class="step" id="step4">
+            <h3 class="step-title show-en">Solutions & Final Thoughts</h3>
+            <h3 class="step-title show-hi" style="display:none">समाधान और अंतिम विचार</h3>
+            <p class="step-subtitle show-en">Even a rough idea helps. Your perspective on solutions is as valuable as describing the problem.</p>
+            <p class="step-subtitle show-hi" style="display:none">एक कच्चा विचार भी मदद करता है।</p>
+            <div class="form-field">
+              <label>What kind of solution do you think could actually help? *</label>
+              <textarea id="inp_solution" rows="4" placeholder='Even a rough idea helps, e.g. "A way to check real mandi prices before selling" or "Someone who can tell me in my language which pesticide to use"...'></textarea>
+              <div class="field-error">Please share your solution idea.</div>
+            </div>
+            <div class="form-field">
+              <label>Any extra observations or comments?</label>
+              <textarea id="inp_extra" rows="3" placeholder="Anything else we should know — about your area, your crop, current schemes, or anything that affects farmers in your region..."></textarea>
+            </div>
+            <div class="form-nav">
+              <button class="btn-back" onclick="prevStep(4)">← Back</button>
+              <div></div>
+            </div>
+            <button class="btn-submit" id="submitBtn" onclick="submitForm()" style="margin-top:16px">
+              <span id="submitText">Submit Your Response →</span>
+            </button>
+            <p style="text-align:center;color:rgba(245,240,232,0.4);font-size:12px;margin-top:12px">
+              🔒 Anonymous & confidential · No spam · Research only
+            </p>
+          </div>
+
+          <!-- Success State -->
+          <div class="success-state" id="successState">
+            <div class="success-icon">🌾</div>
+            <h3 class="success-title">Thank you for sharing!</h3>
+            <p class="success-desc">Your story has been recorded and will directly influence what we build. You represent thousands of farmers who face the same challenges but haven't had a chance to speak yet.</p>
+            <p style="color:var(--gold-light);font-size:14px;margin-bottom:24px">We'll reach out on <span id="confirmEmail" style="font-weight:700"></span> if you're selected for our advisory panel.</p>
+            <div class="success-share">
+              <button class="btn-share" style="background:var(--gold);color:var(--forest)" onclick="shareWhatsApp()">📱 Share on WhatsApp</button>
+              <button class="btn-share" style="background:rgba(245,240,232,0.1);color:var(--cream);border:1px solid rgba(245,240,232,0.2)" onclick="submitAnother()">Submit Another Response</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= REWARDS ======= -->
+<section class="rewards-section" id="rewards">
+  <div class="rewards-inner">
+    <div class="rewards-header reveal">
+      <div class="section-label show-en">Rewards & Recognition</div>
+      <div class="section-label show-hi" style="display:none">पुरस्कार और पहचान</div>
+      <h2 class="section-title show-en">Your time and insights are <span class="italic-accent">valued.</span></h2>
+      <h2 class="section-title show-hi" style="display:none">आपका समय और अंतर्दृष्टि <span class="italic-accent">मूल्यवान है।</span></h2>
+      <p class="section-subtitle" style="margin:0 auto">Top contributors will be recognized and rewarded for their valuable insights.</p>
+    </div>
+    <div class="rewards-grid">
+      <div class="reward-card reveal">
+        <div class="reward-icon">🎁</div>
+        <div class="reward-title">Gift Vouchers</div>
+        <div class="reward-desc">Top 50 detailed responses will receive Amazon/Flipkart gift vouchers as a token of our appreciation.</div>
+        <div class="reward-badge">₹500 – ₹2,000</div>
+      </div>
+      <div class="reward-card reveal" style="transition-delay:0.1s">
+        <div class="reward-icon">🏆</div>
+        <div class="reward-title">Community Recognition</div>
+        <div class="reward-desc">Feature your story (with your permission) in our research publication and farmer community newsletter.</div>
+        <div class="reward-badge">Public Recognition</div>
+      </div>
+      <div class="reward-card reveal" style="transition-delay:0.2s">
+        <div class="reward-icon">🤝</div>
+        <div class="reward-title">Advisory Panel Invitation</div>
+        <div class="reward-desc">Join our farmer advisory panel — help review solutions, give feedback, and shape what gets built.</div>
+        <div class="reward-badge">Exclusive Access</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= PRIVACY ASSURANCE ======= -->
+<section class="privacy-section">
+  <div class="privacy-inner">
+    <div class="privacy-grid">
+      <div class="privacy-item reveal">
+        <div class="privacy-icon-wrap">🔒</div>
+        <div>
+          <h4>100% Confidential</h4>
+          <p>Your personal information is never sold or shared. Only anonymized research data is used.</p>
+        </div>
+      </div>
+      <div class="privacy-item reveal" style="transition-delay:0.1s">
+        <div class="privacy-icon-wrap">🚫</div>
+        <div>
+          <h4>No Spam, Ever</h4>
+          <p>You will only hear from us regarding the research findings or reward notifications.</p>
+        </div>
+      </div>
+      <div class="privacy-item reveal" style="transition-delay:0.2s">
+        <div class="privacy-icon-wrap">🔬</div>
+        <div>
+          <h4>Research Only</h4>
+          <p>This data is strictly for academic and product research. It will never be used for advertising.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= FOOTER ======= -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="nav-logo">
+          <div class="nav-logo-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:22px;height:22px;color:#f5f0e8"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div class="nav-logo-text" style="color:#f5f0e8">AgriVoice 360 <span>Farmer Research Initiative · 2025</span></div>
+        </div>
+        <p>A farmer-first research initiative to build solutions that actually work in the field.</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h5>Research</h5>
+          <a href="#why">Why It Matters</a>
+          <a href="#who">Who Can Respond</a>
+          <a href="#problems">Problem Areas</a>
+          <a href="#voices">Community Voices</a>
+        </div>
+        <div>
+          <h5>Participate</h5>
+          <a href="#experience">Share Experience</a>
+          <a href="#rewards">Rewards Program</a>
+        </div>
+        <div>
+          <h5>Contact</h5>
+          <a href="mailto:research@agrivoice360.in">research@agrivoice360.in</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+      <p>© 2025 AgriVoice 360. Built for the farmers of India.</p>
+      <a href="admin.html" class="admin-link">Admin Dashboard →</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ======= FLOATING CTA ======= -->
+<button class="floating-cta" id="floatingCTA" onclick="scrollToForm()">
+  🌾 Share Your Experience
+</button>
+
+<!-- ======= TOAST ======= -->
+<div class="toast" id="toast"></div>
+
+<!-- ======= SCRIPTS ======= -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="supabase-config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
