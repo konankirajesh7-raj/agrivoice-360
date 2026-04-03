@@ -306,7 +306,7 @@ async function loadCommunityVoices() {
   try {
     const { data, error } = await supabaseClient
       .from('submissions')
-      .select('id,full_name,state,district,problem_category,problem_detail,created_at,role')
+      .select('id,state,district,problem_category,problem_detail,created_at,role')
       .order('created_at', { ascending: false })
       .range(submissionsPage * PAGE_SIZE, (submissionsPage + 1) * PAGE_SIZE - 1);
 
@@ -324,7 +324,9 @@ async function loadCommunityVoices() {
     data.forEach(s => {
       const card = document.createElement('div');
       card.className = 'voice-card reveal';
-      const initial = (s.full_name || 'U')[0].toUpperCase();
+      // Anonymize: show role-based label instead of real name
+      const roleLabel = s.role === 'researcher' ? 'A Researcher' : s.role === 'agri_worker' ? 'An Agri Worker' : 'A Farmer';
+      const avatarEmoji = s.role === 'researcher' ? '🔬' : s.role === 'agri_worker' ? '👷' : '🌾';
       const location = [s.district, s.state].filter(Boolean).join(', ') || 'India';
       const catLabel = categoryLabel(s.problem_category);
       const preview = (s.problem_detail || '').slice(0, 180) + (s.problem_detail?.length > 180 ? '...' : '');
@@ -332,9 +334,9 @@ async function loadCommunityVoices() {
 
       card.innerHTML = `
         <div class="voice-card-top">
-          <div class="voice-avatar">${initial}</div>
+          <div class="voice-avatar">${avatarEmoji}</div>
           <div>
-            <div class="voice-name">${escapeHtml(s.full_name || 'Anonymous')}</div>
+            <div class="voice-name">${escapeHtml(roleLabel)}</div>
             <div class="voice-location">📍 ${escapeHtml(location)}</div>
           </div>
         </div>
